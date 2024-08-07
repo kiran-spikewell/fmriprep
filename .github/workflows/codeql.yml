@@ -15,10 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.9'
 
       - name: Install dependencies
         run: |
@@ -39,12 +39,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: html-lint-results
-          path: |
-            **/*.htmlhint.json
+          path: '**/*.htmlhint.json'
 
       - name: Upload CodeQL results
         uses: actions/upload-artifact@v3
         with:
           name: codeql-results
-          path: |
-            .github/codeql
+          path: '.github/codeql'
