@@ -25,6 +25,15 @@ jobs:
       # Install dependencies and generate package-lock.json
       - name: Install dependencies
         run: npm install
+
+      
+      - name: Check if package-lock.json exists
+        id: check-lockfile
+        run: echo "::set-output name=exists::$(if [ -f package-lock.json ]; then echo 'true'; else echo 'false'; fi)"
+        
+      - name: Clean install dependencies
+        run: npm ci
+        if: steps.check-lockfile.outputs.exists == 'true'
       
       # Use npm ci for clean install if package-lock.json exists
       - name: Clean install dependencies
@@ -47,15 +56,3 @@ jobs:
             dist/**/*.{js,html}
           files-dest: .
           
-# Helper function to check if file exists
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check if package-lock.json exists
-        id: check-lockfile
-        run: echo "::set-output name=exists::$(if [ -f package-lock.json ]; then echo 'true'; else echo 'false'; fi)"
-        
-      - name: Clean install dependencies
-        run: npm ci
-        if: steps.check-lockfile.outputs.exists == 'true'
