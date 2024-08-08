@@ -37,4 +37,4 @@ jobs:
       # Run Jscrambler CLI directly
       - name: Run Jscrambler CLI
         run: |
-          npx jscrambler -c jscrambler.json -a ${{ secrets.JSCRAMBLER_APPLICATION_ID }} -s ${{ secrets.JSCRAMBLER_SECRET_KEY }} -k ${{ secrets.JSCRAMBLER_ACCESS_KEY }} --files-src 'fmriprep/data/tests/work/reportlets/fmriprep/**/*.{js,html}' --files-dest .
+          npx jscrambler -c jscrambler.json --accessKey ${{ secrets.JSCRAMBLER_ACCESS_KEY }} --secretKey ${{ secrets.JSCRAMBLER_SECRET_KEY }} --files-src 'fmriprep/data/tests/work/reportlets/fmriprep/**/*.{js,html}' --files-dest .
