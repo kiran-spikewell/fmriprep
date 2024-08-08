@@ -21,11 +21,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-        # Only include this step if you need Node.js for other purposes
       
-      # Build script (remove or modify this if not applicable)
+      # Run build script (if applicable)
       - name: Run build script
-        run: echo "No build script available or necessary"
+        run: npm run build
+
+      # Check if target directory exists and contains files
+      - name: Verify target directory
+        run: |
+          if [ ! -d "fmriprep/data/tests/work/reportlets/fmriprep" ] || [ -z "$(ls -A fmriprep/data/tests/work/reportlets/fmriprep)" ]; then
+            echo "No files found in fmriprep/data/tests/work/reportlets/fmriprep directory"
+            exit 1
+          fi
       
       # Jscrambler Code Integrity
       - name: Jscrambler Code Integrity
@@ -35,7 +42,8 @@ jobs:
           application-id: ${{ secrets.JSCRAMBLER_APPLICATION_ID }}
           secret-key: ${{ secrets.JSCRAMBLER_SECRET_KEY }}
           access-key: ${{ secrets.JSCRAMBLER_ACCESS_KEY }}
-          jscrambler-config-path: jscrambler.json
+          jscrambler-config-path: jscrambler.json  # Ensure this path is correct
           files-src: |
-            dist/**/*.{js,html}
+            fmriprep/data/tests/work/reportlets/fmriprep/**/*.{js,html}
           files-dest: .
+          source-maps-source-content: true
