@@ -1,0 +1,14 @@
+{
+  "jscrambler": {
+    "project": {
+      "name": "My Project"
+    },
+    "options": {
+      "level": "medium",
+      "protect": {
+        "string-array": true,
+        "control-flow": true
+      }
+    }
+  }
+}
