@@ -35,7 +35,7 @@ jobs:
           application-id: ${{ secrets.JSCRAMBLER_APPLICATION_ID }}
           secret-key: ${{ secrets.JSCRAMBLER_SECRET_KEY }}
           access-key: ${{ secrets.JSCRAMBLER_ACCESS_KEY }}
-          jscrambler-config-path: fmriprep/jscrambler.json
+          jscrambler-config-path: jscrambler.json
           files-src: |
             dist/**/*.{js,html}
           files-dest: .
