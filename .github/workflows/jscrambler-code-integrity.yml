@@ -22,9 +22,9 @@ jobs:
         with:
           node-version: 20
       
-      # Install Jscrambler CLI
+      # Install Jscrambler CLI locally
       - name: Install Jscrambler CLI
-        run: npm install -g jscrambler@latest
+        run: npm install jscrambler --save-dev
       
 
       # Check if target directory exists and contains files
@@ -48,3 +48,5 @@ jobs:
             fmriprep/data/tests/work/reportlets/fmriprep/**/*.{js,html}
           files-dest: .
           source-maps-source-content: true
+        env:
+          PATH: ./node_modules/.bin:$PATH  # Ensure the locally installed Jscrambler CLI is used
