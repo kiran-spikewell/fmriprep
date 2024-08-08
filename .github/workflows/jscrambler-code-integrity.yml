@@ -21,6 +21,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      
+      # Install Jscrambler CLI
+      - name: Install Jscrambler CLI
+        run: npm install -g jscrambler@latest
+      
 
       # Check if target directory exists and contains files
       - name: Verify target directory
