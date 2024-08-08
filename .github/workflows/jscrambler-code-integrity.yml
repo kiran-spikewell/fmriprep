@@ -26,7 +26,6 @@ jobs:
       - name: Install Jscrambler CLI
         run: npm install jscrambler --save-dev
       
-
       # Check if target directory exists and contains files
       - name: Verify target directory
         run: |
@@ -35,18 +34,7 @@ jobs:
             exit 1
           fi
       
-      # Jscrambler Code Integrity
-      - name: Jscrambler Code Integrity
-        id: jscrambler
-        uses: jscrambler/code-integrity-actions/protect@ab65962a2ecffcc362b75a997e24a181d0bde5fb
-        with:
-          application-id: ${{ secrets.JSCRAMBLER_APPLICATION_ID }}
-          secret-key: ${{ secrets.JSCRAMBLER_SECRET_KEY }}
-          access-key: ${{ secrets.JSCRAMBLER_ACCESS_KEY }}
-          jscrambler-config-path: jscrambler.json  # Ensure this path is correct
-          files-src: |
-            fmriprep/data/tests/work/reportlets/fmriprep/**/*.{js,html}
-          files-dest: .
-          source-maps-source-content: true
-        env:
-          PATH: ./node_modules/.bin:$PATH  # Ensure the locally installed Jscrambler CLI is used
+      # Run Jscrambler CLI directly
+      - name: Run Jscrambler CLI
+        run: |
+          npx jscrambler -c jscrambler.json -a ${{ secrets.JSCRAMBLER_APPLICATION_ID }} -s ${{ secrets.JSCRAMBLER_SECRET_KEY }} -k ${{ secrets.JSCRAMBLER_ACCESS_KEY }} --files-src 'fmriprep/data/tests/work/reportlets/fmriprep/**/*.{js,html}' --files-dest .
