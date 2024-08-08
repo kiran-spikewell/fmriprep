@@ -21,23 +21,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+        # Only include this step if you need Node.js for other purposes
       
-      # Install dependencies and generate package-lock.json
-      - name: Install dependencies
-        run: npm install
-      
-      # Check if package-lock.json exists
-      - name: Check if package-lock.json exists
-        id: check-lockfile
-        run: echo "exists=$(if [ -f package-lock.json ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
-      
-      # Use npm ci for clean install if package-lock.json exists
-      - name: Clean install dependencies
-        if: env.exists == 'true'
-        run: npm ci
-      
-      # Run build script
-      - run: npm run build
+      # Build script (remove or modify this if not applicable)
+      - name: Run build script
+        run: echo "No build script available or necessary"
       
       # Jscrambler Code Integrity
       - name: Jscrambler Code Integrity
