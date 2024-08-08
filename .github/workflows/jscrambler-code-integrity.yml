@@ -21,10 +21,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      
-      # Run build script (if applicable)
-      - name: Run build script
-        run: npm run build
 
       # Check if target directory exists and contains files
       - name: Verify target directory
